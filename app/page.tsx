@@ -4,8 +4,7 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import Navbar from "@/components/Navbar";
-import PortfolioSection from "@/components/PortfolioSection";
-import { getFeaturedProjects } from "@/lib/projects";
+import SelectedCaseStudies from "@/components/SelectedCaseStudies";
 
 export default function Home() {
   return (
@@ -15,13 +14,7 @@ export default function Home() {
         <HeroSection />
         <InteractiveQuizClient />
         <AboutSection />
-        <PortfolioSection
-          id="portfolio"
-          title="Selected Case Studies"
-          intro="A tighter sample of product work focused on information hierarchy, user flows, and measurable business outcomes."
-          projects={getFeaturedProjects()}
-          viewAllHref="/projects"
-        />
+        <SelectedCaseStudies />
         <ContactSection />
       </main>
       <Footer />

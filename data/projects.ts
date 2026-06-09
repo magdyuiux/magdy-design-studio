@@ -12,6 +12,7 @@ export type Project = {
   results: string[];
   technologies: string[];
   features: string[];
+  coverImage?: string;
   liveUrl?: string;
   githubUrl?: string;
   featured?: boolean;
@@ -24,106 +25,123 @@ export type Project = {
 
 export const projectsData: Project[] = [
   {
-    id: "fintech-dashboard",
-    title: "FinTech Analytics Dashboard",
-    category: "SaaS product",
-    year: "2023",
-    client: "FinTech Solutions Inc.",
-    role: "Lead UI/UX Designer",
-    duration: "3 months",
+    id: "ehsanlab",
+    title: "EhsanLab - AI Product Studio",
+    category: "SaaS marketing",
+    year: "2026",
+    client: "EhsanLab",
+    role: "Product Designer (IA, UI system, marketing site, dashboard UX)",
+    duration: "Focused portfolio case-study sprint",
     summary:
-      "A financial dashboard redesigned to make dense real-time reporting readable for non-technical teams and executives.",
+      "A premium SaaS case study that turns an early AI-generated concept into a cohesive marketing and product ecosystem for an AI consultancy.",
+    liveUrl: "https://magdy-design-studio.vercel.app/projects/ehsanlab",
     challenge:
-      "The platform was aggregating complex financial data from multiple sources, but users struggled to understand what mattered at a glance. Key insights were buried inside cluttered widgets and weak hierarchy.",
+      "The original concept had an overloaded navigation model, unclear information architecture, and a generic SaaS feel that made the services, industries, proof, and dashboard story harder to scan.",
     solution:
-      "I restructured the information architecture around decision-making moments, grouped metrics into clear modules, simplified comparison states, and introduced a dashboard system that could flex for different user roles without losing clarity.",
+      "I clarified the information architecture, extracted a reusable visual system, connected services and industries to proof, and designed a stronger Book a Call conversion flow that links the marketing website to the QA dashboard experience.",
     results: [
-      "Reduced time-to-insight for core dashboards",
-      "Improved executive scanability across reporting views",
-      "Created a modular system for future dashboard expansion",
+      "Reframed the experience around clear IA, service discovery, and conversion intent.",
+      "Systemized marketing and dashboard UI with reusable tokens and components.",
+      "Connected homepage proof metrics to the dashboard story for a stronger product ecosystem.",
     ],
-    technologies: ["Figma", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    coverImage: "/projects/ehsanlab/cover.webp",
+    technologies: [
+      "Figma",
+      "Information architecture",
+      "Design systems",
+      "SaaS marketing",
+      "Dashboard UX",
+      "Conversion design",
+    ],
     features: [
-      "Modular dashboard layout",
-      "Real-time financial data visualization",
-      "Role-based reporting views",
-      "Export-ready summaries for stakeholders",
+      "Editorial case-study hero with a full-width desktop composition.",
+      "Clarified navigation, footer, services, industries, and proof architecture.",
+      "Tokenized design system for colors, type hierarchy, cards, buttons, inputs, and KPI modules.",
+      "Featured case-study pattern instead of a repetitive case-study grid.",
+      "Pricing and Book a Call flow designed around clear engagement models.",
+      "QA dashboard view focused on KPI widgets and a bug board.",
     ],
-    liveUrl: "https://fintech-demo.magdy.design",
-    githubUrl: "https://github.com/yourusername/fintech-dashboard",
-    featured: true,
-    nextProject: {
-      id: "ecommerce-app",
-      title: "Modern E-Commerce Mobile App",
-      category: "Mobile product",
-    },
-  },
-  {
-    id: "ecommerce-app",
-    title: "Modern E-Commerce Mobile App",
-    category: "Mobile product",
-    year: "2024",
-    client: "ShopEasy Retail",
-    role: "Product Designer and UX Researcher",
-    duration: "4 months",
-    summary:
-      "A mobile commerce experience rebuilt around faster product discovery and a cleaner checkout flow.",
-    challenge:
-      "The existing app was losing revenue through high cart abandonment and weak retention. Users had difficulty scanning products, trusting pricing, and finishing checkout without friction.",
-    solution:
-      "I mapped the main drop-off points, simplified the purchase flow, tightened the visual hierarchy on product pages, and introduced a faster decision path with clearer actions, fewer interruptions, and more relevant recommendations.",
-    results: [
-      "Targeted the highest-friction checkout moments",
-      "Made product discovery faster on small screens",
-      "Improved clarity around pricing and purchase actions",
-    ],
-    technologies: ["Figma", "React Native", "Hotjar", "Google Analytics", "Firebase"],
-    features: [
-      "One-tap checkout path",
-      "Smarter product discovery",
-      "Wishlist and save-for-later flows",
-      "Integrated order tracking",
-    ],
-    liveUrl: "https://apps.apple.com/app/shop-easy",
-    featured: true,
-    nextProject: {
-      id: "ai-saas",
-      title: "AI Content Creation Platform",
-      category: "Marketing website",
-    },
-  },
-  {
-    id: "ai-saas",
-    title: "AI Content Creation Platform",
-    category: "Marketing website",
-    year: "2024",
-    client: "NeuroTech AI",
-    role: "Web Designer and Frontend Developer",
-    duration: "2 months",
-    summary:
-      "A conversion-led landing experience built to explain a new AI product faster and reduce bounce from unclear positioning.",
-    challenge:
-      "The landing page was failing to communicate product value quickly enough. Visitors were dropping before they understood the offer, which made acquisition spend less efficient.",
-    solution:
-      "I rebuilt the hero hierarchy, added clearer product framing, introduced stronger proof and demo touchpoints, and organized the page around a simpler conversion path that reduced hesitation at each scroll depth.",
-    results: [
-      "+42% lift in landing-page conversions",
-      "Clearer product understanding in the first screen",
-      "Stronger CTA progression across the page",
-    ],
-    technologies: ["Next.js", "Tailwind CSS", "Figma", "Vercel Analytics", "A/B testing"],
-    features: [
-      "Hero section rewritten around value clarity",
-      "Demo-led product explanation",
-      "Stronger social proof placement",
-      "Experiment-ready CTA architecture",
-    ],
-    liveUrl: "https://neurotech-ai.com",
-    githubUrl: "https://github.com/yourusername/ai-saas-platform",
     featured: true,
     nextProject: {
       id: "travel-app",
       title: "Travel Experience Platform",
+      category: "Mobile product",
+    },
+  },
+
+  {
+    id: "solobook-onboarding",
+    title: "SoloBook – Onboarding & First Invoice Activation Flow",
+    category: "SaaS product",
+    year: "2025",
+    client: "Self-initiated concept for freelancers and solo founders",
+    role: "Product Designer (UX, UI, flows)",
+    duration: "3–5 day focused sprint",
+    summary:
+      "A lightweight onboarding and activation flow for a finance tool that helps freelancers send their first invoice in under 5 minutes.",
+    challenge:
+      "Most finance tools overwhelm new users with long setup, tooltip overload, and generic dashboards before they see any value. Freelancers and solo founders often drop off before sending their first invoice, which means no activation and no reason to come back.",
+    solution:
+      "I redesigned the first-run experience around one clear outcome: sending the first invoice. The flow starts with a goal-based welcome screen, collects only essential business details, guides users through creating a simple but real invoice, and ends on a contextual dashboard that reflects that first success and suggests confident next steps.",
+    results: [
+      "Modeled time to first invoice reduced from ~20–30 minutes of setup to under 5 minutes for a typical new user.",
+      "Onboarding completion is designed to improve from ~40–50% to a targeted 75–80% through shorter, goal-based steps.",
+      "A contextual post-onboarding dashboard replaces empty charts with a clear invoice status and guided next actions.",
+    ],
+    technologies: ["Figma", "UX Strategy", "Design systems", "SaaS onboarding"],
+    features: [
+      "Goal-based welcome screen that lets users choose 'Send my first invoice' as a clear first success.",
+      "Minimal setup step that collects only essential business info with calm, supportive microcopy.",
+      "First invoice creation flow designed to feel professional without overwhelming accounting complexity.",
+      "Preview and send screen that builds confidence with a clear invoice preview and focused primary action.",
+      "Post-onboarding dashboard that reflects the first invoice, shows status, and recommends next steps instead of generic empty charts.",
+      "Bad onboarding comparison that contrasts traditional finance onboarding with SoloBook’s activation-first approach.",
+    ],
+    coverImage: "/projects/solobook/cover.png",
+    liveUrl:
+      "https://magdy-design-studio.vercel.app/projects/solobook-onboarding",
+    featured: true,
+    nextProject: {
+      id: "ehsanlab",
+      title: "EhsanLab - AI Product Studio",
+      category: "SaaS marketing",
+    },
+  },
+
+  {
+    id: "supportly-analytics-dashboard",
+    title: "Supportly – Support Analytics Dashboard",
+    category: "SaaS product",
+    year: "2025",
+    client: "Self-initiated concept for SaaS support teams",
+    role: "Product Designer (UX, UI, flows)",
+    duration: "1-week focused sprint",
+    summary:
+      "An AI-powered support analytics dashboard that turns a generic UI kit into a focused tool for support managers to spot urgent tickets, SLA risks, and agent performance in seconds.",
+    challenge:
+      "Support teams were drowning in disconnected ticket lists and noisy dashboards. Managers struggled to see which issues were truly urgent, how SLAs were trending, and which agents needed support without jumping between multiple views.",
+    solution:
+      "I defined a lean information architecture around three core screens—Overview, Tickets, and Agents—and redesigned the main dashboard using 80–90% of an existing SaaS UI kit. The layout prioritizes urgent KPIs, clear trends, and a clean tickets table, supported by a small design system for consistent cards, tables, and states.",
+    results: [
+      "Gave support managers a 10-second ‘morning health check’ via a focused Overview screen",
+      "Reduced dashboard noise by limiting KPIs and grouping metrics into clear sections",
+      "Created a reusable design system to extend Supportly without breaking visual consistency",
+    ],
+    technologies: ["Figma", "UX Strategy", "Design systems", "SaaS dashboard"],
+    features: [
+      "Overview dashboard with urgent KPIs and SLA insights",
+      "Tickets workspace with empty/error states and focused filters",
+      "Agent performance view for weekly coaching and trend analysis",
+      "Information architecture and user flows for support managers",
+      "Lightweight component system reusing 80–90% of the original UI kit",
+    ],
+    coverImage: "/projects/supportly/cover.jpg",
+    liveUrl:
+      "https://magdy-design-studio.vercel.app/projects/supportly-analytics-dashboard",
+    featured: true,
+    nextProject: {
+      id: "ecommerce-app",
+      title: "Modern E-Commerce Mobile App",
       category: "Mobile product",
     },
   },
@@ -146,14 +164,21 @@ export const projectsData: Project[] = [
       "Improved clarity of search and pricing states",
       "Built a more trustworthy travel browsing experience",
     ],
-    technologies: ["Figma", "React Native", "Google Maps API", "Stripe", "Firebase"],
+    technologies: [
+      "Figma",
+      "React Native",
+      "Google Maps API",
+      "Stripe",
+      "Firebase",
+    ],
     features: [
       "Map-led browsing",
       "Smarter filter controls",
       "Clearer booking flow",
       "Experience detail pages built for comparison",
     ],
-    liveUrl: "https://play.google.com/store/apps/details?id=com.wanderlust",
+    liveUrl:
+      "https://play.google.com/store/apps/details?id=com.wanderlust",
     nextProject: {
       id: "health-tracker",
       title: "Health and Wellness Tracker",
@@ -179,7 +204,13 @@ export const projectsData: Project[] = [
       "Made progress tracking easier to understand",
       "Created space for future personalized insights",
     ],
-    technologies: ["Figma", "React Native", "HealthKit", "Google Fit API", "Chart.js"],
+    technologies: [
+      "Figma",
+      "React Native",
+      "HealthKit",
+      "Google Fit API",
+      "Chart.js",
+    ],
     features: [
       "Customizable health dashboard",
       "Integrated activity and sleep tracking",
@@ -211,7 +242,13 @@ export const projectsData: Project[] = [
       "Reduced design and frontend duplication",
       "Created a stronger shared source of truth",
     ],
-    technologies: ["Storybook", "React", "TypeScript", "Figma", "Zeroheight"],
+    technologies: [
+      "Storybook",
+      "React",
+      "TypeScript",
+      "Figma",
+      "Zeroheight",
+    ],
     features: [
       "Reusable component library",
       "Tokenized visual system",
@@ -220,8 +257,8 @@ export const projectsData: Project[] = [
     ],
     githubUrl: "https://github.com/techcorp/design-system",
     nextProject: {
-      id: "fintech-dashboard",
-      title: "FinTech Analytics Dashboard",
+      id: "supportly-analytics-dashboard",
+      title: "Supportly – Support Analytics Dashboard",
       category: "SaaS product",
     },
   },

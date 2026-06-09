@@ -24,7 +24,7 @@ export default function AboutSection() {
         <div className="max-w-3xl">
           <span className="section-kicker">About</span>
           <h2 className="section-title">Design decisions should move the product forward, not just make it prettier.</h2>
-          <p className="section-copy">
+          <p className="section-copy !text-left !mx-0 !max-w-3xl">
             I work across UX, interface design, and frontend implementation with a bias toward product clarity and
             measurable outcomes. The goal is simple: help teams ship experiences that feel intentional, perform well,
             and make the next user action obvious.
@@ -33,7 +33,10 @@ export default function AboutSection() {
 
         <div className="capability-grid mt-10">
           {capabilities.map((item) => (
-            <article key={item.title} className="surface-card rounded-3xl p-6">
+            <article
+              key={item.title}
+              className="surface-card rounded-3xl p-6 transition hover:-translate-y-1 hover:border-white/20 hover:bg-white/5"
+            >
               <p className="text-sm uppercase tracking-[0.22em] text-zinc-500">Capability</p>
               <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white">{item.title}</h3>
               <p className="mt-4 text-base leading-8 text-zinc-400">{item.copy}</p>

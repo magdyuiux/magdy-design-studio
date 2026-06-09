@@ -5,8 +5,8 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 const proofPoints = [
-  { value: "11+", label: "Projects launched" },
-  { value: "5", label: "Client teams served" },
+  { value: "11+", label: "Products Designed" },
+  { value: "5", label: "Teams Supported" },
   { value: "3+", label: "Years in product work" },
   { value: "+42%", label: "Best measured lift" },
 ];

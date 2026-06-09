@@ -60,7 +60,7 @@ export default function ContactSection() {
           <div>
             <span className="section-kicker">Contact</span>
             <h2 className="section-title">Let&apos;s design the next growth step.</h2>
-            <p className="section-copy">
+            <p className="section-copy !text-left !mx-0 !max-w-3xl">
               Have a product, landing page, onboarding flow, or UX issue to solve? Send a short brief. I usually
               reply within 24 hours.
             </p>
