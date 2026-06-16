@@ -25,7 +25,7 @@ export default function PortfolioSection({
           <div className="max-w-3xl">
             <span className="section-kicker">Work</span>
             <h2 className="section-title">{title}</h2>
-            <p className="section-copy">{intro}</p>
+            <p className="section-copy !text-left !mx-0 !max-w-3xl">{intro}</p>
           </div>
 
           {viewAllHref ? (
@@ -37,9 +37,19 @@ export default function PortfolioSection({
         </div>
 
         <div className="project-grid mt-10">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+          {projects
+            .filter((project) => project.id === "ehsanlab")
+            .map((project) => (
+              <ProjectCard key={project.id} project={project} size="large" compact />
+            ))}
+        </div>
+
+        <div className="project-grid mt-6 grid-cols-1 md:grid-cols-2">
+          {projects
+            .filter((project) => project.id !== "ehsanlab")
+            .map((project) => (
+              <ProjectCard key={project.id} project={project} size="medium" compact />
+            ))}
         </div>
       </div>
     </section>

@@ -34,7 +34,7 @@ export const projectsData: Project[] = [
     duration: "Focused portfolio case-study sprint",
     summary:
       "A premium SaaS case study that turns an early AI-generated concept into a cohesive marketing and product ecosystem for an AI consultancy.",
-    liveUrl: "https://magdy-design-studio.vercel.app/projects/ehsanlab",
+    liveUrl: "https://www.behance.net/gallery/251179753/EhsanLab-Modern-SaaS-QA-Platform-%28UX-Case-Study%29?platform=direct",
     challenge:
       "The original concept had an overloaded navigation model, unclear information architecture, and a generic SaaS feel that made the services, industries, proof, and dashboard story harder to scan.",
     solution:
@@ -99,7 +99,7 @@ export const projectsData: Project[] = [
     ],
     coverImage: "/projects/solobook/cover.png",
     liveUrl:
-      "https://magdy-design-studio.vercel.app/projects/solobook-onboarding",
+      "https://www.behance.net/gallery/251180129/SoloBook-UX-Case-Study",
     featured: true,
     nextProject: {
       id: "ehsanlab",
@@ -137,7 +137,7 @@ export const projectsData: Project[] = [
     ],
     coverImage: "/projects/supportly/cover.jpg",
     liveUrl:
-      "https://magdy-design-studio.vercel.app/projects/supportly-analytics-dashboard",
+      "https://www.behance.net/gallery/249400427/Supportly-Customer-Support-Analytics-Dashboard",
     featured: true,
     nextProject: {
       id: "ecommerce-app",
