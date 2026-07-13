@@ -1,56 +1,78 @@
 "use client";
 
-import { useState, useTransition } from "react";
-
-type FormState = {
-  name: string;
-  email: string;
-  company: string;
-  message: string;
-};
-
-const initialState: FormState = {
-  name: "",
-  email: "",
-  company: "",
-  message: "",
-};
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import {
+  buildContactSubmissionPayload,
+  canSubmitSubmission,
+  initialContactFormValues,
+  type ContactFormValues,
+  type ValidationErrors,
+  validateContactForm,
+} from "@/lib/contact-form";
+import { submitWeb3Forms } from "@/lib/web3forms";
 
 export default function ContactSection() {
-  const [form, setForm] = useState<FormState>(initialState);
+  const [form, setForm] = useState<ContactFormValues>(initialContactFormValues);
   const [responseMessage, setResponseMessage] = useState("");
-  const [isPending, startTransition] = useTransition();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<ValidationErrors<keyof ContactFormValues>>({});
+  const botGuardStartedAt = useRef(0);
 
-  function updateField<K extends keyof FormState>(field: K, value: FormState[K]) {
+  useEffect(() => {
+    botGuardStartedAt.current = Date.now();
+  }, []);
+
+  function updateField<K extends keyof ContactFormValues>(field: K, value: ContactFormValues[K]) {
     setForm((current) => ({
       ...current,
       [field]: value,
     }));
+    setErrors((current) => {
+      if (!current[field]) return current;
+      const next = { ...current };
+      delete next[field];
+      return next;
+    });
   }
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (isSubmitting) return;
+
     setResponseMessage("");
 
-    startTransition(async () => {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
+    const nextErrors = validateContactForm(form);
+    if (Date.now() - botGuardStartedAt.current < 2500) {
+      nextErrors.botcheck = "Please wait a moment before submitting again.";
+    }
 
-      const data = (await response.json()) as { message?: string };
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors);
+      setResponseMessage("Please review the highlighted fields and try again.");
+      return;
+    }
 
-      if (!response.ok) {
-        setResponseMessage(data.message ?? "Something went wrong. Please try again.");
-        return;
-      }
+    const throttle = canSubmitSubmission("contact");
+    if (!throttle.allowed) {
+      setResponseMessage(`Please wait ${Math.ceil(throttle.retryAfterMs / 1000)} seconds before trying again.`);
+      return;
+    }
 
-      setResponseMessage(data.message ?? "Thanks. I will be in touch soon.");
-      setForm(initialState);
-    });
+    try {
+      setIsSubmitting(true);
+      setResponseMessage("");
+
+      await submitWeb3Forms(buildContactSubmissionPayload(form));
+
+      setForm(initialContactFormValues);
+      setErrors({});
+      setResponseMessage("Thanks. Your project brief is in and I will reply soon.");
+      botGuardStartedAt.current = Date.now();
+    } catch (error) {
+      setResponseMessage(error instanceof Error ? error.message : "Something went wrong while sending your message.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -73,6 +95,17 @@ export default function ContactSection() {
           </div>
 
           <form onSubmit={handleSubmit} className="surface-card rounded-[2rem] p-6 md:p-8">
+            <input
+              type="text"
+              name="botcheck"
+              tabIndex={-1}
+              autoComplete="off"
+              value={form.botcheck}
+              onChange={(event) => updateField("botcheck", event.target.value)}
+              className="hidden"
+              aria-hidden="true"
+            />
+
             <div className="grid gap-4 md:grid-cols-2">
               <label className="block">
                 <span className="mb-2 block text-sm text-zinc-400">Name</span>
@@ -83,7 +116,14 @@ export default function ContactSection() {
                   onChange={(event) => updateField("name", event.target.value)}
                   className="contact-field"
                   placeholder="Your name"
+                  aria-invalid={Boolean(errors.name)}
+                  aria-describedby={errors.name ? "contact-name-error" : undefined}
                 />
+                {errors.name ? (
+                  <p id="contact-name-error" className="mt-2 text-xs text-red-400">
+                    {errors.name}
+                  </p>
+                ) : null}
               </label>
 
               <label className="block">
@@ -95,7 +135,14 @@ export default function ContactSection() {
                   onChange={(event) => updateField("email", event.target.value)}
                   className="contact-field"
                   placeholder="you@company.com"
+                  aria-invalid={Boolean(errors.email)}
+                  aria-describedby={errors.email ? "contact-email-error" : undefined}
                 />
+                {errors.email ? (
+                  <p id="contact-email-error" className="mt-2 text-xs text-red-400">
+                    {errors.email}
+                  </p>
+                ) : null}
               </label>
             </div>
 
@@ -107,7 +154,14 @@ export default function ContactSection() {
                 onChange={(event) => updateField("company", event.target.value)}
                 className="contact-field"
                 placeholder="Company name"
+                aria-invalid={Boolean(errors.company)}
+                aria-describedby={errors.company ? "contact-company-error" : undefined}
               />
+              {errors.company ? (
+                <p id="contact-company-error" className="mt-2 text-xs text-red-400">
+                  {errors.company}
+                </p>
+              ) : null}
             </label>
 
             <label className="mt-4 block">
@@ -119,16 +173,23 @@ export default function ContactSection() {
                 onChange={(event) => updateField("message", event.target.value)}
                 className="contact-field"
                 placeholder="What are you building, where is the friction, and what outcome do you want to improve?"
+                aria-invalid={Boolean(errors.message)}
+                aria-describedby={errors.message ? "contact-message-error" : undefined}
               />
+              {errors.message ? (
+                <p id="contact-message-error" className="mt-2 text-xs text-red-400">
+                  {errors.message}
+                </p>
+              ) : null}
             </label>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <button
                 type="submit"
-                disabled={isPending}
+                disabled={isSubmitting}
                 className="button-primary min-w-[220px] disabled:cursor-not-allowed disabled:opacity-70"
               >
-                {isPending ? "Sending project brief..." : "Send project brief"}
+                {isSubmitting ? "Sending project brief..." : "Send project brief"}
               </button>
               <p className="text-sm text-zinc-500">No long form needed. A concise overview is enough.</p>
             </div>
